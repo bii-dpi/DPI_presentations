@@ -49,7 +49,8 @@
         \item Input: ``mostly'' just the ligand part of the co-complex,
         rasterized into a 3D grid box.
         \item Novel voxel representation: each voxel has 24 channels, ``embedding the different raw information of atoms located around the voxel''.
-        \item Grid processed using ...
+        \item Grid processed using efficient 3D CNN implementation.
+        \item Final BAP created using ``ensemble-like'' training approach. 
     \end{enumerate}
 \end{frame}
 
@@ -82,6 +83,9 @@
         n(r_i) = 1 - \exp\left(-\left(\frac{r_{vdW, i}}{r_i}\right)^{12}\right)
     \end{equation*}
     over all atoms $i$, where $r_{vdW, i}$ is the $i^{th}$ atom radius and $r_i$ is the inter-voxel distance.
+    \vspace{2mm}
+    
+    Reduces sparsity in input volumes, aids with convolution.
 \end{frame}
 
 
@@ -193,9 +197,9 @@
 %------------------------------------------------
 \begin{frame}{Current Progress}
     \begin{enumerate}
-        \item \textcolor{darkgreen}{Rasterize protein PDBs joined to ligand MOL2 files.}
+        \item \textcolor{darkgreen}{Rasterize protein DUD-E PDBs joined to ligand MOL2 files.}
         \begin{itemize}
-            \item Done using Python's \texttt{HTMD} package.
+            \item Done using Python's \texttt{HTMD} and \texttt{MoleculeKit} packages.
         \end{itemize}
         \item \textcolor{darkgreen}{Channelize 3D grids.}
         \begin{itemize}
@@ -207,8 +211,8 @@
         \end{itemize}
         \item \textcolor{darkred}{Train, tune, and validate DeepAtom on NSCC.}
         \begin{itemize}
-            \item I have more ``low-level'' control over this DeepAtom implementation than
-            I do of those of DrugVQA and GGNN.
+            \item I have more ``low-level'' control over this DeepAtom implementation than I do of those of DrugVQA and GGNN.
+            \item Need to accommodate response class imbalance.
         \end{itemize}
     \end{enumerate}
 \end{frame}
